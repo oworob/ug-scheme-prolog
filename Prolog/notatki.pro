@@ -1,3 +1,8 @@
+% Prolog odpowiada na pytania TAK/NIE
+% :- => IF
+% , -> AND
+% ; -> OR
+
 % FACTS
 parent(tom,bob).
 parent(tom,liz).

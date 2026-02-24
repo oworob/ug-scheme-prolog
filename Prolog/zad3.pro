@@ -7,7 +7,14 @@ f(s(s(s(X))),N) :- f(X,N).
 
 % How does Prolog answer to the following questions?
 
-f(s(1),A) % -> A = two
-f(s(s(1)),two) % -> false
-f(s(s(s(s(s(s(1)))))),C) % -> f(s(s(s((1)))),C) -> f(1,C) -> C = one
-f(D,three) % -> D = s(s(1))
+f(s(1),A)
+% -> A = two
+
+f(s(s(1)),two)
+% -> false
+
+f(s(s(s(s(s(s(1)))))),C)
+% -> f(s(s(s((1)))),C) -> f(1,C) -> C = one
+
+f(D,three)
+% -> D = s(s(1))
