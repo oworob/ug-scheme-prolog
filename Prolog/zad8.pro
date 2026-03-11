@@ -27,15 +27,11 @@ reverse([H1|T1],L2,A) :- reverse(T1,L2,[H1|A]).
 
 % e) evenlength(L) and oddlength(L), which are fulfilled if the length of L is even and odd, respectively.
 
-evenlength(L) :- evenlength(L,1).
-evenlength([],1).
-evenlength([_|T],0) :- evenlength(T,1).
-evenlength([_|T],1) :- evenlength(T,0).
+evenlength([]).
+evenlength([_,_|T]) :- evenlength(T).
 
-oddlength(L) :- oddlength(L,1).
-oddlength([],0).
-oddlength([_|T],0) :- oddlength(T,1).
-oddlength([_|T],1) :- oddlength(T,0).
+oddlength([_]).
+oddlength([_,_|T]) :- oddlength(T). 
 
 % f) shift(L1,L2), which is fulfilled if L2 the list L1 after one rotation to left. 
 % Example: ?- shift([1,2,3,4,5],L). -> L = [2,3,4,5,1] 
@@ -61,20 +57,13 @@ combine([H1|T1],[H2|T2],[H3|T3]) :- H3 = [H1,H2], combine(T1,T2,T3).
 % ?- palindrom([a,b,c]). -> false
 % ?- palindrom([a,b,c,d,c,b,a]) -> true
 
-palindrom(L) :- palindrom([], L, []).
-palindrom(LL,[H|T],LR) :- palindrom([H|LL],T,[H|LR]).
-palindrom(L,[],L).
-palindrom(L,[_],L).
+palindrom(L) :- reverse(L,L).
 
 % j) p(X,L,Y,Z), which is fulfilled if Y is the predecessor of X in L and Z is the successor of X in L.
 % Example: p(3,[1,2,3,4,5],2,4) -> true
 
-p(X,L,Y,Z) :- p(X,L,Y,Z,[]).
-p(X,[],Y,Z,[Y,X,Z]).
-p(X,[Y|T],Y,Z,[]) :- p(X,T,Y,Z,[Y]).
-p(X,[X|T],Y,Z,[Y]) :- p(X,T,Y,Z,[Y,X]).
-p(X,[Z|T],Y,Z,[Y,X]) :- p(X,T,Y,Z,[Y,X,Z]).
-p(X,[_|T],Y,Z,A) :- p(X,T,Y,Z,A).
+p(X,[Y,X,Z|_],Y,Z).
+p(X,[_|T],Y,Z) :- p(X,T,Y,Z).
 
 % k) q(X,L1,L2), which is fulfilled if L2 is the beginning of the list L1 up to the (first) double occurence of element X.
 % Example: q(3,[1,2,3,3,1,2,4],[1,2,3,3]) -> true
